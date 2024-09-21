@@ -1,95 +1,90 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RPS</title>
-    <link rel="stylesheet" href="site2-styles.css">
-  </head>
-  <body>
-    <div class="title">Welcome to Rock Paper Scissors Game</div>
-    <div class="game">
-      <button class="button-rock" onclick="GetResults('rock')"><img class="symbol-picture" src="Pictures/rock.png"></button>
-      <button class="button-paper" onclick="GetResults('paper')"><img class="symbol-picture" src="Pictures/paper.png"></button>
-      <button class="button-scissors" onclick="GetResults('scissors')"><img class="symbol-picture" src="Pictures/scissors.png"></button>
-      <button class="button-reset" onclick="Reset()"><img class="symbol-picture" src="Pictures/reset.png"></button>
-    </div>
-    <p style="display: flex; justify-content: center; align-items: center">results</p>
-    <div class="results-grid">
-      <div class="wins">
-        Wins: <span id="win-count">0</span>
-      </div>
-      <div class="losses">
-        Losses: <span id="loss-count">0</span>
-      </div>
-      <div class="draws">
-        Draws: <span id="draw-count">0</span>
-      </div>
-    </div>
 
-  </body>
-  <script>
-    let wins = 0;
-    let losses = 0;
-    let draws = 0;
-    function GetResults(playerChoice)
+<head>
+  <title>RPS</title>
+  <link rel="stylesheet" href="site2-styles.css">
+</head>
+
+<body>
+  <div class="title">Welcome to Rock Paper Scissors Game</div>
+  <div class="game">
+    <button class="button-rock" onclick="GetResults('rock')"><img class="symbol-picture"
+        src="Pictures/rock.png"></button>
+    <button class="button-paper" onclick="GetResults('paper')"><img class="symbol-picture"
+        src="Pictures/paper.png"></button>
+    <button class="button-scissors" onclick="GetResults('scissors')"><img class="symbol-picture"
+        src="Pictures/scissors.png"></button>
+    <button class="button-reset" onclick="Reset()"><img class="symbol-picture" src="Pictures/reset.png"></button>
+  </div>
+  <p style="display: flex; justify-content: center; align-items: center">results</p>
+  <div class="results-grid">
+    <div class="wins">
+      Wins: <span id="win-count">0</span>
+    </div>
+    <div class="losses">
+      Losses: <span id="loss-count">0</span>
+    </div>
+    <div class="draws">
+      Draws: <span id="draw-count">0</span>
+    </div>
+  </div>
+
+</body>
+<script>
+  let wins = 0;
+  let losses = 0;
+  let draws = 0;
+  function GetResults(playerChoice)
+  {
+    const words = ["rock", "paper", "scissors"];
+    const computerChoice = words[Math.floor(Math.random() * words.length)];
+    console.log(computerChoice);
+    if (computerChoice === playerChoice)
     {
-      let computerChoice = document.querySelector(`.button-${playerChoice}`);
-      let randomNumber = Math.random();
-      let word = "rock";
-      if(0<randomNumber<0.33)
+      draws++;
+      alert(`you chose ${playerChoice} and computer chose ${computerChoice}, DRAW`)
+    } else
+    {
+      if (computerChoice === 'rock' && playerChoice === 'paper' ||
+        computerChoice === 'paper' && playerChoice === 'scissors' ||
+        computerChoice === 'scissors' && playerChoice === 'rock')
       {
-        computerChoice = "rock";
-      }
-      else if(0.33<randomNumber<0.66)
+        wins++;
+        alert(`you chose ${playerChoice} and computer chose ${computerChoice}, YOU WON`)
+        prompt
+      } else
       {
-        computerChoice = "paper";
+        losses++;
+        console.log(computerChoice);
+        alert(`you chose ${playerChoice} and computer chose ${computerChoice}, YOU LOST`)
       }
-      else
-      {
-        computerChoice = "scissors";
-      }
-      if (computerChoice === playerChoice) {
-          draws++;
-          console.log("It's a draw!");
-          alert(`you chose ${playerChoice} and computer chose ${computerChoice}, DRAW`)
-        } else {
-          if (computerChoice === 'rock' && playerChoice === 'paper' ||
-              computerChoice === 'paper' && playerChoice === 'scissors' ||
-              computerChoice === 'scissors' && playerChoice === 'rock') {
-            wins++;
-            alert(`you chose ${playerChoice} and computer chose ${computerChoice}, YOU WON`)
-            console.log("You won!");
-            prompt
-          } else {
-            losses++;
-            console.log(computerChoice);
-            alert(`you chose ${playerChoice} and computer chose ${computerChoice}, YOU LOST`)
-            console.log("You lost!");
-          }
-        }
-        const winCountElement = document.getElementById('win-count');
-        const lossCountElement = document.getElementById('loss-count');
-        const drawCountElement = document.getElementById('draw-count');
+    }
+    const winCountElement = document.getElementById('win-count');
+    const lossCountElement = document.getElementById('loss-count');
+    const drawCountElement = document.getElementById('draw-count');
 
-        if (winCountElement && lossCountElement && drawCountElement) 
-        {
-          winCountElement.innerText = wins;
-          lossCountElement.innerText = losses;
-          drawCountElement.innerText = draws;
-        }
-        else 
-        {
-          console.error("One or more result elements are missing.");
-        }
-      }
-      function Reset()
-      {
-        const winCountElement = document.getElementById('win-count');
-        const lossCountElement = document.getElementById('loss-count');
-        const drawCountElement = document.getElementById('draw-count');
+    if (winCountElement && lossCountElement && drawCountElement) 
+    {
+      winCountElement.innerText = wins;
+      lossCountElement.innerText = losses;
+      drawCountElement.innerText = draws;
+    }
+    else 
+    {
+      console.error("One or more result elements are missing.");
+    }
+  }
+  function Reset()
+  {
+    const winCountElement = document.getElementById('win-count');
+    const lossCountElement = document.getElementById('loss-count');
+    const drawCountElement = document.getElementById('draw-count');
 
-        winCountElement.innerText = 0;
-        lossCountElement.innerText = 0;
-          drawCountElement.innerText = 0;
-      }
-  </script>
+    winCountElement.innerText = 0;
+    lossCountElement.innerText = 0;
+    drawCountElement.innerText = 0;
+  }
+</script>
+
 </html>
